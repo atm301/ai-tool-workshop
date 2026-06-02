@@ -866,7 +866,8 @@
     btn.textContent = '✓ 已複製';
     btn.classList.add('done');
     toast('✓ 已複製到剪貼簿，貼到 ChatGPT / Claude / Gemini 即可');
-    var name = box.querySelector('.name') ? box.querySelector('.name').textContent.trim() : 'prompt';
+    var nameEl = box.querySelector('.name');
+    var name = nameEl ? (nameEl.firstChild ? nameEl.firstChild.textContent : nameEl.textContent).trim() : 'prompt';
     track('copy_prompt', { prompt_name: name });
     awardExp('copy_' + name.slice(0,24), 5);
     setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1800);
@@ -902,14 +903,16 @@
     var okey = a.getAttribute('data-out') || '';
     track('outbound_click', { link: okey, url: a.href });
     if(window.fbq) fbq('trackCustom', 'OutboundClick', { link: okey });
-    if(okey.indexOf('slido') === 0) awardExp('vote', 15);
+    if(/^(slido|vote|signup|register)/.test(okey)) awardExp('vote', 15);
   });
 
   // 捲動深度
   var depths = [25,50,75,100], fired = {};
   window.addEventListener('scroll', function(){
-    var h = document.documentElement;
-    var p = Math.round((h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100);
+    // 用 window.scrollY + innerHeight，避開 body{overflow-x:hidden} 讓 documentElement.scrollTop 失準的怪癖
+    var top = window.scrollY || document.documentElement.scrollTop || 0;
+    var denom = document.documentElement.scrollHeight - window.innerHeight;
+    var p = denom <= 0 ? 100 : Math.round(top / denom * 100);
     depths.forEach(function(d){
       if(p >= d && !fired[d]){ fired[d] = true; track('scroll_depth', { percent: d }); if(d === 100) awardExp('scroll_bottom', 6); }
     });
@@ -926,7 +929,7 @@
   };
   const STORE = 'aitw_state_v1';
   let state = { attendee: null, expLog: {} };
-  try { var _raw = localStorage.getItem(STORE); if(_raw) state = JSON.parse(_raw); } catch(e){}
+  try { var _raw = localStorage.getItem(STORE); if(_raw){ var _p = JSON.parse(_raw); state = { attendee: _p.attendee || null, expLog: _p.expLog || {} }; } } catch(e){ state = { attendee:null, expLog:{} }; }
   function save(){ try { localStorage.setItem(STORE, JSON.stringify(state)); } catch(e){} }
   function totalExp(){ return Object.keys(state.expLog).reduce(function(s,k){ return s + (+state.expLog[k] || 0); }, 0); }
 
@@ -1040,13 +1043,12 @@
     track('cert_open', { total: totalExp() });
   }
 
-  // ---- FAQ 計分 ----
-  document.querySelectorAll('details.faq').forEach(function(d, i){
-    d.addEventListener('toggle', function(){ if(d.open) awardExp('faq_' + i, 2); });
-  });
-
   // ---- init ----
   (function initGame(){
+    // FAQ 計分（放 init 內，確保 section 已存在才綁定）
+    document.querySelectorAll('details.faq').forEach(function(d, i){
+      d.addEventListener('toggle', function(){ if(d.open) awardExp('faq_' + i, 2); });
+    });
     if(CONFIG.ENABLE_GROUPS){
       var wrap = document.getElementById('regGroupWrap'); wrap.style.display = 'block';
       var sel = document.getElementById('regGroup');
