@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5">
+<meta name="theme-color" content="#0e2a2a">
+<title>AI 工具實作工作坊｜資源站 × 提示詞 × 工具連結</title>
+<meta name="description" content="AI 工具實作工作坊（講師 何佳勳・小圭｜圭話行銷）課程輔助站。提示詞七元素框架、可一鍵複製的提示詞範本、核心工具連結、平台比較、部署×API×資安、MCP 與必裝工具清單。">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="AI 工具實作工作坊｜帶著問題來，帶著一個做出來的工具離開">
+<meta property="og:description" content="提示詞七元素 × 可複製提示詞範本 × 工具連結 × 平台比較 × 部署資安 × MCP 必裝清單。一頁掌握整堂課的資源。">
+<meta property="og:image" content="https://atm301.github.io/ai-tool-workshop/og.png">
+<meta property="og:url" content="https://atm301.github.io/ai-tool-workshop/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="AI 工具實作工作坊｜資源站">
+<meta name="twitter:description" content="提示詞七元素 × 可複製提示詞 × 工具連結 × MCP 必裝清單。">
+<meta name="twitter:image" content="https://atm301.github.io/ai-tool-workshop/og.png">
+<link rel="canonical" href="https://atm301.github.io/ai-tool-workshop/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%A0%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9B%A0%EF%B8%8F%3C/text%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Noto+Sans+TC:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-RDJD1YVHR7"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-RDJD1YVHR7');
+</script>
+<!-- Meta Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4979950938896019');
+  fbq('track', 'PageView');
+</script>
+
+<!-- JSON-LD -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Course",
+  "name": "AI 工具實作工作坊",
+  "description": "從提示詞設計到工具開發 — 帶著你動手打造自己的 AI 工具。提示詞七元素框架、PRD/SSD 開發方法、部署×API×資安、MCP 與必裝工具清單。",
+  "provider": {
+    "@type": "Organization",
+    "name": "圭話行銷股份有限公司",
+    "sameAs": "https://atmarketing.tw"
+  },
+  "instructor": { "@type": "Person", "name": "何佳勳（小圭）" },
+  "inLanguage": "zh-Hant",
+  "timeRequired": "PT3H30M"
+}
+</script>
+
+<style>
+  :root {
+    --c-bg:     #0e2a2a;
+    --c-bg-2:   #143838;
+    --c-bg-3:   #1d4a48;
+    --c-teal:   #2dd4bf;
+    --c-teal-d: #14b8a6;
+    --c-green:  #4ade80;
+    --c-blue:   #38bdf8;
+    --c-yellow: #fbbf24;
+    --c-coral:  #ff8a5c;
+    --c-coral-d:#f2702f;
+    --c-purple: #a78bfa;
+    --c-text:   #ecfdf5;
+    --c-mute:   #8db5b0;
+    --c-line:   #2c5a57;
+    --nav-h:    58px;
+    --base-fz:  16px;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin:0; padding:0; }
+  html { font-size: var(--base-fz); scroll-behavior: smooth; scroll-padding-top: calc(var(--nav-h) + 14px); }
+  body {
+    font-family: 'Noto Sans TC', system-ui, -apple-system, 'PingFang TC', 'Microsoft JhengHei', sans-serif;
+    background: var(--c-bg); color: var(--c-text); line-height: 1.8; overflow-x: hidden;
+  }
+  body::before {
+    content:''; position: fixed; inset:0; z-index:0; pointer-events:none;
+    background: repeating-linear-gradient(0deg, transparent 0 3px, rgba(255,255,255,.012) 3px 4px);
+  }
+  .pixel { font-family:'Press Start 2P', monospace; line-height:1.5; letter-spacing:.02em; }
+  a { color: var(--c-teal); text-decoration: none; }
+  a:hover { color: var(--c-yellow); text-decoration: underline; }
+  img { max-width:100%; display:block; }
+  button { font-family: inherit; cursor: pointer; }
+  h2, h3 { line-height:1.4; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 20px; position: relative; z-index: 2; }
+
+  /* stripes */
+  .stripe { height: 12px; background: repeating-linear-gradient(90deg, var(--c-teal) 0 22px, var(--c-coral) 22px 44px); }
+
+  /* ===== Nav ===== */
+  nav.topnav {
+    position: sticky; top:0; z-index: 50; height: var(--nav-h);
+    background: rgba(14,42,42,.92); backdrop-filter: blur(8px);
+    border-bottom: 3px solid var(--c-teal); display:flex; align-items:center;
+  }
+  .topnav .wrap { display:flex; align-items:center; gap:14px; width:100%; }
+  .topnav .brand { font-family:'Press Start 2P',monospace; font-size:.72rem; color:var(--c-teal); white-space:nowrap; }
+  .topnav .links { display:flex; gap:6px; overflow-x:auto; flex:1; scrollbar-width:none; }
+  .topnav .links::-webkit-scrollbar { display:none; }
+  .topnav .links a {
+    font-size:.82rem; font-weight:700; color:var(--c-mute); padding:6px 11px; border-radius:8px;
+    white-space:nowrap; border:1px solid transparent;
+  }
+  .topnav .links a:hover { color:var(--c-text); background:var(--c-bg-3); text-decoration:none; }
+  .nav-cta {
+    background: var(--c-coral); color:#3a1500; font-weight:900; padding:8px 14px; border-radius:10px;
+    white-space:nowrap; font-size:.85rem; border:0;
+  }
+  .nav-cta:hover { background: var(--c-yellow); text-decoration:none; color:#3a1500; }
+
+  /* ===== Hero ===== */
+  header.hero { padding: 54px 0 46px; text-align:center; border-bottom:5px solid var(--c-coral); position:relative; }
+  .hero-eyebrow { color:var(--c-yellow); font-size:.78rem; letter-spacing:.22em; margin-bottom:16px; }
+  .hero h1 {
+    font-family:'Press Start 2P',monospace; margin:0 0 18px; font-size:clamp(1.3rem,5.2vw,2.5rem);
+    color:var(--c-text); text-shadow:4px 4px 0 var(--c-teal-d); line-height:1.45;
+  }
+  .hero .sub { font-size:clamp(1rem,2.4vw,1.25rem); color:var(--c-text); max-width:720px; margin:0 auto 14px; }
+  .hero .quote {
+    display:inline-block; margin:14px auto 24px; padding:12px 22px; border-radius:14px;
+    background:var(--c-bg-2); border:2px dashed var(--c-teal); color:var(--c-teal); font-weight:700;
+  }
+  .hero .meta { color:var(--c-mute); font-size:.92rem; }
+  .hero .meta b { color:var(--c-text); }
+  .hero-btns { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:26px; }
+  .btn {
+    display:inline-flex; align-items:center; gap:8px; padding:13px 22px; border-radius:12px;
+    font-weight:900; font-size:1rem; border:0;
+  }
+  .btn-primary { background:var(--c-coral); color:#3a1500; box-shadow:0 4px 0 var(--c-coral-d); }
+  .btn-primary:hover { background:var(--c-yellow); text-decoration:none; color:#3a1500; transform:translateY(1px); box-shadow:0 3px 0 var(--c-coral-d); }
+  .btn-ghost { background:transparent; color:var(--c-teal); border:2px solid var(--c-teal); }
+  .btn-ghost:hover { background:var(--c-bg-3); text-decoration:none; color:var(--c-yellow); border-color:var(--c-yellow); }
+
+  /* ===== Section ===== */
+  section { padding: 52px 0; border-bottom:1px solid var(--c-line); }
+  .sec-tag { font-family:'Press Start 2P',monospace; font-size:.62rem; color:var(--c-coral); letter-spacing:.12em; }
+  .sec-title { font-size:clamp(1.4rem,3.6vw,2rem); font-weight:900; margin:8px 0 6px; color:var(--c-text); }
+  .sec-title .em { color:var(--c-teal); }
+  .sec-desc { color:var(--c-mute); margin:0 0 26px; max-width:760px; }
+
+  /* ===== Cards grid ===== */
+  .grid { display:grid; gap:16px; }
+  .g2 { grid-template-columns:repeat(2,1fr); }
+  .g3 { grid-template-columns:repeat(3,1fr); }
+  .g4 { grid-template-columns:repeat(4,1fr); }
+  @media (max-width:860px){ .g3,.g4{grid-template-columns:repeat(2,1fr);} }
+  @media (max-width:560px){ .g2,.g3,.g4{grid-template-columns:1fr;} }
+
+  .card {
+    background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:14px; padding:20px;
+    border-top:4px solid var(--c-teal); transition:transform .12s, border-color .12s;
+  }
+  .card:hover { transform:translateY(-3px); border-top-color:var(--c-coral); }
+  .card h3 { margin:0 0 6px; font-size:1.1rem; display:flex; align-items:center; gap:9px; }
+  .card .ic { font-size:1.5rem; line-height:1; }
+  .card p { margin:0 0 12px; color:var(--c-mute); font-size:.93rem; }
+  .badge { display:inline-block; font-size:.72rem; font-weight:800; padding:2px 9px; border-radius:999px; background:var(--c-bg-3); color:var(--c-teal); margin-left:6px; }
+  .badge.free { color:var(--c-green); }
+  .badge.paid { color:var(--c-yellow); }
+  .tool-link {
+    display:inline-flex; align-items:center; gap:6px; font-weight:800; font-size:.9rem;
+    color:var(--c-blue); background:var(--c-bg-3); padding:7px 13px; border-radius:9px; border:1px solid var(--c-line);
+  }
+  .tool-link:hover { color:var(--c-yellow); text-decoration:none; border-color:var(--c-yellow); }
+  .tool-link::after { content:'↗'; font-size:.85em; opacity:.8; }
+
+  /* ===== Prompt box ===== */
+  .prompt-box { background:#0a201f; border:1px solid var(--c-line); border-left:4px solid var(--c-coral); border-radius:12px; overflow:hidden; margin:14px 0; }
+  .prompt-head { display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 14px; background:var(--c-bg-2); border-bottom:1px solid var(--c-line); }
+  .prompt-head .name { font-weight:900; font-size:.95rem; display:flex; align-items:center; gap:8px; }
+  .prompt-head .name .tg { font-size:.7rem; font-weight:800; padding:2px 8px; border-radius:6px; background:var(--c-bg-3); color:var(--c-teal); }
+  .copy-btn { background:var(--c-teal); color:#06201d; font-weight:900; border:0; padding:7px 14px; border-radius:8px; font-size:.85rem; white-space:nowrap; }
+  .copy-btn:hover { background:var(--c-yellow); }
+  .copy-btn.done { background:var(--c-green); }
+  .prompt-box pre {
+    margin:0; padding:16px; white-space:pre-wrap; word-break:break-word;
+    font-family:'Noto Sans TC',monospace; font-size:.92rem; line-height:1.85; color:#d6fbf3;
+  }
+
+  /* ===== Seven elements ===== */
+  .el-list { display:grid; gap:10px; }
+  .el {
+    background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:12px; overflow:hidden;
+  }
+  .el-h { display:flex; align-items:center; gap:14px; padding:14px 16px; cursor:pointer; }
+  .el-num { font-family:'Press Start 2P',monospace; font-size:.95rem; color:var(--c-coral); min-width:34px; }
+  .el-name { font-weight:900; font-size:1.05rem; }
+  .el-name small { color:var(--c-mute); font-weight:700; margin-left:8px; font-size:.78rem; letter-spacing:.06em; }
+  .el-tog { margin-left:auto; font-size:1.3rem; color:var(--c-teal); font-weight:900; }
+  .el-body { max-height:0; overflow:hidden; transition:max-height .25s ease; }
+  .el.open .el-body { max-height:340px; }
+  .el-body-in { padding:0 16px 16px; }
+  .el-why { color:var(--c-mute); margin:0 0 10px; }
+  .el-eg { background:#0a201f; border:1px dashed var(--c-teal); border-radius:9px; padding:11px 14px; color:var(--c-teal); font-weight:600; }
+
+  /* ===== Table ===== */
+  .tbl-wrap { overflow-x:auto; border:1px solid var(--c-line); border-radius:12px; }
+  table { width:100%; border-collapse:collapse; min-width:560px; font-size:.92rem; }
+  th, td { text-align:left; padding:12px 14px; border-bottom:1px solid var(--c-line); vertical-align:top; }
+  thead th { background:var(--c-bg-3); color:var(--c-text); font-weight:900; }
+  tbody tr:nth-child(even) { background:var(--c-bg-2); }
+  td:first-child { font-weight:800; color:var(--c-teal); white-space:nowrap; }
+
+  /* ===== Steps ===== */
+  .steps { display:grid; gap:12px; }
+  .step { display:flex; gap:14px; background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:12px; padding:14px 16px; border-left:4px solid var(--c-teal); }
+  .step .n { font-family:'Press Start 2P',monospace; color:var(--c-coral); font-size:.85rem; min-width:30px; }
+  .step b { display:block; }
+  .step span { color:var(--c-mute); font-size:.92rem; }
+  .step .tool { display:inline-block; margin-top:4px; font-size:.78rem; font-weight:800; color:var(--c-blue); background:var(--c-bg-3); padding:2px 9px; border-radius:6px; }
+
+  /* lists */
+  ul.clean { list-style:none; padding:0; margin:0; display:grid; gap:9px; }
+  ul.clean li { padding-left:26px; position:relative; color:var(--c-text); }
+  ul.clean li::before { content:'▸'; position:absolute; left:6px; color:var(--c-teal); font-weight:900; }
+  ul.warn li::before { content:'⚠'; color:var(--c-yellow); }
+  ul.ok li::before { content:'✓'; color:var(--c-green); }
+
+  /* callout */
+  .callout { background:var(--c-bg-2); border:1px solid var(--c-line); border-left:4px solid var(--c-yellow); border-radius:12px; padding:16px 18px; margin:16px 0; }
+  .callout b { color:var(--c-yellow); }
+
+  /* FAQ */
+  .faq { background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:12px; margin-bottom:10px; overflow:hidden; }
+  .faq summary { padding:15px 18px; font-weight:800; cursor:pointer; list-style:none; display:flex; gap:10px; align-items:flex-start; }
+  .faq summary::-webkit-details-marker { display:none; }
+  .faq summary .q { color:var(--c-coral); font-family:'Press Start 2P',monospace; font-size:.7rem; margin-top:3px; }
+  .faq[open] summary { background:var(--c-bg-3); }
+  .faq .a { padding:4px 18px 18px 50px; color:var(--c-mute); }
+
+  /* lecturer */
+  .lect { display:grid; grid-template-columns:auto 1fr; gap:22px; align-items:center; background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:16px; padding:24px; }
+  @media(max-width:560px){ .lect{grid-template-columns:1fr; text-align:center;} }
+  .lect .ava { width:96px; height:96px; border-radius:16px; background:var(--c-bg-3); display:grid; place-items:center; font-size:3rem; border:3px solid var(--c-teal); margin:0 auto; }
+  .pill-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:10px; }
+  .pill { font-size:.8rem; font-weight:800; padding:5px 12px; border-radius:999px; background:var(--c-bg-3); color:var(--c-teal); border:1px solid var(--c-line); }
+
+  /* footer */
+  footer { padding:36px 0 60px; text-align:center; color:var(--c-mute); font-size:.88rem; }
+  footer .big { font-size:1.05rem; color:var(--c-text); font-weight:800; margin-bottom:8px; }
+
+  /* toast */
+  #toast { position:fixed; left:50%; bottom:26px; transform:translateX(-50%) translateY(40px); z-index:200;
+    background:var(--c-green); color:#06250f; font-weight:900; padding:12px 22px; border-radius:12px;
+    box-shadow:0 6px 24px rgba(0,0,0,.4); opacity:0; transition:.25s; pointer-events:none; }
+  #toast.show { opacity:1; transform:translateX(-50%) translateY(0); }
+
+  .anchor { scroll-margin-top: calc(var(--nav-h) + 14px); }
+  .muted-note { font-size:.82rem; color:var(--c-mute); margin-top:8px; }
+</style>
+</head>
+<body>
+<div class="stripe"></div>
+
+<!-- ===== NAV ===== -->
+<nav class="topnav">
+  <div class="wrap">
+    <span class="brand">🛠️ AI WORKSHOP</span>
+    <div class="links">
+      <a href="#vote">投票</a>
+      <a href="#tools">工具總覽</a>
+      <a href="#framework">七元素</a>
+      <a href="#prompts">提示詞庫</a>
+      <a href="#platform">平台比較</a>
+      <a href="#method">開發方法</a>
+      <a href="#showcase">小圭工具</a>
+      <a href="#deploy">部署資安</a>
+      <a href="#mcp">MCP・推薦</a>
+      <a href="#after">課後・Q&A</a>
+    </div>
+    <a class="nav-cta" href="https://app.sli.do/event/v8AxaJRCQUKV9c8RHxyE1i" target="_blank" rel="noopener" data-out="slido_nav">🗳️ 投票</a>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<header class="hero anchor" id="top">
+  <div class="wrap">
+    <div class="hero-eyebrow">◆ 實作工作坊 · HANDS-ON WORKSHOP ◆</div>
+    <h1>AI 工具實作工作坊</h1>
+    <p class="sub">從提示詞設計到工具開發 — 帶著你動手打造自己的 AI 工具</p>
+    <div class="quote">「帶著你想解決的問題來，帶著一個做出來的工具離開。」</div>
+    <p class="meta">講師 <b>何佳勳（小圭）</b> ｜ 圭話行銷股份有限公司 ｜ 3.5 小時 · 台北實體場</p>
+    <div class="hero-btns">
+      <a class="btn btn-primary" href="https://app.sli.do/event/v8AxaJRCQUKV9c8RHxyE1i" target="_blank" rel="noopener" data-out="slido_hero">🗳️ 前往今日投票（Slido）</a>
+      <a class="btn btn-ghost" href="#prompts">📋 直接看提示詞範本</a>
+    </div>
+  </div>
+</header>
+
+<!-- ===== VOTE ===== -->
+<section class="anchor" id="vote">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 01 · 今日挑戰投票</div>
+    <h2 class="sec-title">先投票：<span class="em">你最想用 AI 解決的工作問題？</span></h2>
+    <p class="sec-desc">票數最高的題目，就是今天 Live DEMO 現場開發的主題。掃下方連結，30 秒寫下你的問題。</p>
+
+    <div class="grid g2" style="margin-bottom:18px">
+      <div class="card"><h3><span class="ic">✍️</span>A 自動撰寫 Email / 報告 / 提案</h3><p>把重複性的文字工作交給 AI。</p></div>
+      <div class="card"><h3><span class="ic">📋</span>B 整理會議記錄 × 自動產出摘要</h3><p>從逐字稿到重點，一鍵完成。</p></div>
+      <div class="card"><h3><span class="ic">🖥️</span>C 快速製作簡報 / 行銷素材</h3><p>輸入主題，產出可用的素材。</p></div>
+      <div class="card"><h3><span class="ic">🤖</span>D 建立可重複使用的 AI 助手</h3><p>一次設定，天天省下解釋成本。</p></div>
+    </div>
+    <div class="card" style="border-top-color:var(--c-coral)">
+      <h3><span class="ic">🔍</span>E 大量文件搜尋 × 知識問答</h3>
+      <p>讓 AI 讀完文件再精準回答。</p>
+      <a class="tool-link" href="https://app.sli.do/event/v8AxaJRCQUKV9c8RHxyE1i" target="_blank" rel="noopener" data-out="slido_section">前往 Slido 寫下你的問題</a>
+    </div>
+
+    <div class="callout" style="border-left-color:var(--c-coral);margin-top:22px">
+      <b>🚀 現場 DEMO 工具：AI 工作流拆解專家</b>
+      <p style="margin:8px 0 14px;color:var(--c-text)">後半場 Live DEMO 會用到。現場人多時，點下方按鈕會<strong>自動分流</strong>到不同伺服器，避免一台塞車。</p>
+      <button class="btn btn-primary" onclick="lbOpen(this)" data-name="workflow_demo" data-urls="https://ai.studio/apps/39157b86-28b9-493c-87e9-267120193d1d|https://ai101.atmarketing.tw/workflow">🚀 啟動工作流拆解專家（自動分流）</button>
+      <div class="muted-note" style="margin-top:12px">或手動選伺服器：
+        <a href="https://ai.studio/apps/39157b86-28b9-493c-87e9-267120193d1d" target="_blank" rel="noopener" data-out="wf_aistudio">AI Studio 版</a>
+        ·
+        <a href="https://ai101.atmarketing.tw/workflow" target="_blank" rel="noopener" data-out="wf_ai101">ai101 版</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOOLS ===== -->
+<section class="anchor" id="tools">
+  <div class="wrap">
+    <div class="sec-tag">核心工具總覽</div>
+    <h2 class="sec-title">整堂課會反覆用到的 <span class="em">六樣工具</span></h2>
+    <p class="sec-desc">今天結束你會知道何時用哪個。每張卡片都可直接點進官方網站。</p>
+    <div class="grid g3">
+      <div class="card">
+        <h3><span class="ic">🤖</span>ChatGPT GPTs</h3>
+        <p>建立專屬 AI 助手，可上傳知識、串接 Actions（外部 API）。</p>
+        <a class="tool-link" href="https://chatgpt.com" target="_blank" rel="noopener" data-out="chatgpt">chatgpt.com</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">✨</span>Gemini GEMs</h3>
+        <p>Google 生態內的 AI 助手，整合 Gmail / Docs / Drive，免費可用。</p>
+        <a class="tool-link" href="https://gemini.google.com" target="_blank" rel="noopener" data-out="gemini">gemini.google.com</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🧪</span>Google AI Studio</h3>
+        <p>開發者的 Prompt 工作台，可調參數、取 API 金鑰。</p>
+        <a class="tool-link" href="https://aistudio.google.com" target="_blank" rel="noopener" data-out="aistudio">aistudio.google.com</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🪶</span>Claude</h3>
+        <p>輔助撰寫 PRD、長文規劃與程式碼生成；Artifacts 直接生互動工具。</p>
+        <a class="tool-link" href="https://claude.ai" target="_blank" rel="noopener" data-out="claude">claude.ai</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🔌</span>MCP</h3>
+        <p>讓 AI 連接外部工具與資料源的開放協議（AI 工具界的 USB）。</p>
+        <a class="tool-link" href="https://modelcontextprotocol.io" target="_blank" rel="noopener" data-out="mcp_io">modelcontextprotocol.io</a>
+      </div>
+      <div class="card">
+        <h3><span class="ic">🎯</span>Prompt 工程</h3>
+        <p>一切的基本功 — 結構化的指令設計。見下方「七元素框架」。</p>
+        <a class="tool-link" href="#framework" data-out="framework_jump">看七元素框架</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FRAMEWORK ===== -->
+<section class="anchor" id="framework">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 02 · AI 助手基礎</div>
+    <h2 class="sec-title">提示詞不是一句話：<span class="em">七元素框架</span></h2>
+    <p class="sec-desc">把需求拆成七個層級，每一項都明確 — 你能逐項檢查、逐項調整，做出來的助手才穩定、可複用。點每一列展開說明與範例。</p>
+
+    <div class="el-list" id="elList">
+      <div class="el open"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">01</span><span class="el-name">角色 <small>ROLE</small></span><span class="el-tog">−</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">設定 AI 的身份與專業背景。明確的角色，能讓回應的專業度與語氣立刻定錨。</p><div class="el-eg">你是一位擅長台灣市場的數位行銷顧問。</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">02</span><span class="el-name">目標 <small>GOAL</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">明確告知 AI 這個工具的核心任務，讓每一次輸出都對準同一個目的。</p><div class="el-eg">專門協助用戶撰寫社群貼文與廣告文案。</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">03</span><span class="el-name">背景 <small>CONTEXT</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">補充使用情境與受眾資訊，AI 才知道「對誰說、在什麼場合說」。</p><div class="el-eg">用戶為中小企業主，品牌以 B2C 零售為主。</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">04</span><span class="el-name">限制 <small>CONSTRAINT</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">告訴 AI 不能做什麼、要注意什麼。限制和指示一樣重要。</p><div class="el-eg">不使用英文 slogan，語調親切、不過度正式。</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">05</span><span class="el-name">格式 <small>FORMAT</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">指定輸出的結構與長度，結果才能穩定、可以直接拿來使用。</p><div class="el-eg">每次產出 3 則文案，每則 80–120 字，含 emoji。</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">06</span><span class="el-name">範例 <small>EXAMPLE</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">用 Few-shot 示範輸入與輸出，能快速校準 AI 的風格與品質。</p><div class="el-eg">［輸入範例貼文］→［輸出風格參考］</div></div></div></div>
+      <div class="el"><div class="el-h" onclick="toggleEl(this)"><span class="el-num">07</span><span class="el-name">反應規則 <small>REACTION</small></span><span class="el-tog">+</span></div>
+        <div class="el-body"><div class="el-body-in"><p class="el-why">設定特殊情況的應對邏輯，讓工具在資訊不足時也不會亂答。</p><div class="el-eg">若用戶沒提供產品資訊，先主動詢問三個問題。</div></div></div></div>
+    </div>
+
+    <h3 style="margin:28px 0 6px">七元素完整示範｜社群文案 AI 助手</h3>
+    <p class="sec-desc" style="margin-bottom:8px">把七個元素串起來，就是一份完整、可直接貼到 ChatGPT / Claude / Gemini 的助手設定。</p>
+    <div class="prompt-box">
+      <div class="prompt-head">
+        <span class="name">🪄 社群文案 AI 助手（完整版）<span class="tg">複製即用</span></span>
+        <button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button>
+      </div>
+      <pre>【角色＋目標】你是一位擅長台灣市場的數位行銷顧問，專門協助我撰寫社群貼文與廣告文案。
+【背景】我是中小企業主，品牌定位 B2C 零售，主要客群為 25–40 歲台灣消費者。
+【限制＋格式】請避免英文 slogan，語調親切不過度正式；每次產出 3 則文案，每則 80–120 字，含適量 emoji。
+【範例風格】請參考這類口吻：「最近天氣轉涼，是時候換上你的秋日新寵了 🍂」——溫度感、生活化、結尾有行動暗示。
+【反應規則】若我未提供產品資訊，請先主動詢問：① 產品/服務是什麼 ② 目標受眾 ③ 想傳達的核心訊息，再開始撰寫。</pre>
+    </div>
+    <div class="hero-btns" style="justify-content:flex-start;margin-top:6px">
+      <a class="btn btn-ghost" href="https://gemini.google.com" target="_blank" rel="noopener" data-out="gemini_build">在 Gemini 建立 GEM</a>
+      <a class="btn btn-ghost" href="https://chatgpt.com/gpts/editor" target="_blank" rel="noopener" data-out="gpt_build">在 ChatGPT 建立 GPT</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROMPT LIBRARY ===== -->
+<section class="anchor" id="prompts">
+  <div class="wrap">
+    <div class="sec-tag">提示詞範本庫</div>
+    <h2 class="sec-title">複製就能用的 <span class="em">提示詞範本</span></h2>
+    <p class="sec-desc">這是整堂課的重點外帶包。每個範本按「📋 複製」即可貼到 ChatGPT / Claude / Gemini，把 ［方括號］ 換成你的內容。</p>
+
+    <h3 style="margin:6px 0 4px">① 結合時事寫文（SOP：查時事 → 結合寫文 → 篩選）</h3>
+    <p class="muted-note">先到 <a href="https://trends.google.com.tw/trending?geo=TW" target="_blank" rel="noopener" data-out="gtrends">Google Trends 台灣</a> 找最新熱門關鍵字，再套這個公式。</p>
+    <div class="prompt-box">
+      <div class="prompt-head"><span class="name">📰 時事行銷貼文 <span class="tg">我是誰 / 想做什麼 / 目的</span></span><button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button></div>
+      <pre>我販售［產品］，特色是［產品特色］。
+我要針對近期 Google 上最熱門的時事「［時事關鍵字］」撰寫社群貼文，
+目的是［銷售 / 引流 / 互動］，希望達成［具體目標，例如月銷售額 50 萬→100 萬］。
+請依：1.引題痛點 2.真實情境 3.產品優勢與解方 4.限定優惠/緊迫感 5.行動呼籲 CTA 的結構撰寫，
+並在結尾設計一句引導留言的互動問句。</pre>
+    </div>
+
+    <h3 style="margin:22px 0 4px">② 一次生 10 個高點閱標題</h3>
+    <div class="prompt-box">
+      <div class="prompt-head"><span class="name">🏷️ 標題發想</span><button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button></div>
+      <pre>我賣［產品］，特色是［特色］，想要［目標客群］來買。
+給我 10 個高點閱率的標題，風格多元（情境型、數字型、提問型、痛點型各幾個），避免農場式驚嘆號。</pre>
+    </div>
+    <p class="muted-note">進階接續用：「根據第  X 個標題再產出 10 個」→「根據第 X 個標題寫社群文案」→「根據上面寫一檔行銷活動」→「根據上面設計一張社群用圖」。</p>
+
+    <h3 style="margin:22px 0 4px">③ 風格切換（同一篇文，換不同口吻）</h3>
+    <div class="prompt-box">
+      <div class="prompt-head"><span class="name">🎭 風格變體 <span class="tg">瓊瑤 / 金庸 / 偶像劇 / 哈利波特</span></span><button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button></div>
+      <pre>用［瓊瑤體 / 金庸武俠風 / 偶像劇風 / 哈利波特魔法信風］的口吻，
+重寫上面這篇貼文。保留原本的優惠資訊與行動呼籲，但換上該風格的敘事腔調與比喻。</pre>
+    </div>
+    <div class="prompt-box">
+      <div class="prompt-head"><span class="name">🌊 譬喻法寫文</span><button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button></div>
+      <pre>幫我用譬喻的方式寫一段文案：把［主題，例如旅行 / 我的產品］
+比喻成［一部電影 / 一條道路 / 一場長途駕駛 / 一本還沒寫完的小說］，
+寫成 3 個短版本讓我挑選，每版 4–6 行，語氣有畫面感。</pre>
+    </div>
+
+    <h3 style="margin:22px 0 4px">④ 用 Claude 產出 PRD（開發工具前先做）</h3>
+    <div class="prompt-box">
+      <div class="prompt-head"><span class="name">📄 PRD 產品需求文件 <span class="tg">給 Claude</span></span><button class="copy-btn" onclick="copyPrompt(this)">📋 複製</button></div>
+      <pre>我想開發一個［工具名稱］，幫助［目標使用者］解決［他們的問題］。
+請幫我產出完整的 PRD 文件，包含這 5 個欄位：
+1. 工具名稱 × 核心目標（一句話）
+2. 目標使用者與痛點
+3. 輸入（使用者給什麼、格式）
+4. 輸出（AI 回傳什麼、長什麼樣）
+5. 限制（不能做什麼、邊界在哪）
+若有沒想清楚的地方，請主動反問我，再把欄位補齊。</pre>
+    </div>
+
+    <div class="callout">
+      <b>小提醒：</b>把這些範本存進你的 GEM / GPT 的 System Prompt，就不必每次重貼。做好的助手還能分享給同事、給團隊，變成可複製的工作流程。
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLATFORM ===== -->
+<section class="anchor" id="platform">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 03 · 平台選擇</div>
+    <h2 class="sec-title">聊天介面 vs <span class="em">AI Studio</span>：怎麼選？</h2>
+    <p class="sec-desc">用「我想做什麼」來判斷，比用「我會不會」更準。</p>
+
+    <div class="tbl-wrap" style="margin-bottom:18px">
+      <table>
+        <thead><tr><th>比較面向</th><th>ChatGPT / Gemini / GEMs</th><th>Google AI Studio</th></tr></thead>
+        <tbody>
+          <tr><td>目標用戶</td><td>一般使用者 / 業務應用</td><td>開發者 / 進階應用者</td></tr>
+          <tr><td>操作介面</td><td>圖形化介面，類似聊天 App</td><td>Prompt 工作台，技術向介面</td></tr>
+          <tr><td>主要功能</td><td>建立 GEMs、日常對話、工具整合</td><td>調參數、Prompt 測試、生 API 金鑰</td></tr>
+          <tr><td>模型選擇</td><td>固定系列</td><td>Gemini Flash / Pro 等自由選</td></tr>
+          <tr><td>費用</td><td>免費 / 訂閱</td><td>依 API 呼叫量計費，有免費額度</td></tr>
+          <tr><td>輸出整合</td><td>連結 Gmail / Docs / Slides</td><td>輸出 API → 串接任何應用</td></tr>
+          <tr><td>部署方式</td><td>不需部署，直接在 App 用</td><td>透過 API 整合到自製工具 / 網站</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="grid g2">
+      <div class="card"><h3><span class="ic">💬</span>選 Gemini App / GEMs</h3>
+        <ul class="clean ok">
+          <li>只需要一個可對話的 AI 助手</li>
+          <li>不想寫程式，想用介面操作</li>
+          <li>工作場景在 Google Workspace 內</li>
+          <li>想快速驗證 Prompt 邏輯</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--c-coral)"><h3><span class="ic">🧪</span>選 Google AI Studio</h3>
+        <ul class="clean ok">
+          <li>要開發給別人使用的工具</li>
+          <li>需要精細調整模型行為與參數</li>
+          <li>要把 AI 串到自己的網頁或應用</li>
+          <li>需要批次處理大量資料</li>
+        </ul>
+        <a class="tool-link" href="https://aistudio.google.com" target="_blank" rel="noopener" data-out="aistudio2" style="margin-top:12px">開啟 AI Studio</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== METHOD ===== -->
+<section class="anchor" id="method">
+  <div class="wrap">
+    <div class="sec-tag">開發方法論</div>
+    <h2 class="sec-title">先想清楚，再動手：<span class="em">PRD → SSD → 開發</span></h2>
+    <p class="sec-desc">在寫任何 Prompt 或程式之前，先做兩份文件，能在動手前就避開大半的坑。</p>
+
+    <div class="grid g2" style="margin-bottom:22px">
+      <div class="card"><h3><span class="ic">📄</span>PRD 決定「要做什麼」</h3>
+        <p>產品需求文件，五個必填欄位：</p>
+        <ul class="clean">
+          <li>工具名稱 × 核心目標</li>
+          <li>目標使用者與痛點</li>
+          <li>輸入（資訊與格式）</li>
+          <li>輸出（內容與樣式）</li>
+          <li>限制（邊界在哪）</li>
+        </ul>
+      </div>
+      <div class="card" style="border-top-color:var(--c-coral)"><h3><span class="ic">📐</span>SSD 決定「怎麼做」</h3>
+        <p>系統設計文件，把需求轉成技術架構：</p>
+        <ul class="clean">
+          <li>選擇平台與模型</li>
+          <li>Prompt 架構（System / User / Assistant）</li>
+          <li>資料流向：輸入 → 處理 → 輸出</li>
+          <li>是否需要 API？是否要儲存資料？</li>
+          <li>錯誤處理 × 邊界條件</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 style="margin:6px 0 12px">小圭的工具開發流程（六步）</h3>
+    <div class="steps">
+      <div class="step"><span class="n">01</span><div><b>定義問題</b><span>一句話描述「誰的什麼問題」，再用 Claude 擴展成完整 PRD。</span><span class="tool">Claude / 紙筆</span></div></div>
+      <div class="step"><span class="n">02</span><div><b>Prompt 設計</b><span>從七元素框架開始填，先在 AI Studio 測試對話效果。</span><span class="tool">AI Studio</span></div></div>
+      <div class="step"><span class="n">03</span><div><b>快速原型</b><span>用 v0.dev 或直接問 Claude，產出前端介面 HTML 初稿。</span><span class="tool">Claude / v0.dev</span></div></div>
+      <div class="step"><span class="n">04</span><div><b>串接測試</b><span>用 AI Studio 的 API 金鑰串接，用真實場景測 20 次。</span><span class="tool">Gemini API</span></div></div>
+      <div class="step"><span class="n">05</span><div><b>收集回饋</b><span>給 3–5 個潛在使用者試用，觀察他們在哪裡卡關。</span><span class="tool">真人測試</span></div></div>
+      <div class="step"><span class="n">06</span><div><b>部署上線</b><span>輸出 HTML，用 GitHub Pages / Vercel 部署，或包成 GEMs。</span><span class="tool">Vercel / GEMs</span></div></div>
+    </div>
+    <div class="hero-btns" style="justify-content:flex-start;margin-top:16px">
+      <a class="btn btn-ghost" href="https://claude.ai" target="_blank" rel="noopener" data-out="claude2">Claude 寫 PRD</a>
+      <a class="btn btn-ghost" href="https://v0.dev" target="_blank" rel="noopener" data-out="v0">v0.dev 做介面</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SHOWCASE ===== -->
+<section class="anchor" id="showcase">
+  <div class="wrap">
+    <div class="sec-tag">實戰案例</div>
+    <h2 class="sec-title">小圭做出來的 <span class="em">真實 AI 工具</span></h2>
+    <p class="sec-desc">這些都是用今天的方法做出來、正在線上運作的工具。點進去看，回家也能照著做一個。</p>
+    <div class="grid g2">
+      <div class="card" style="border-top-color:var(--c-coral)"><h3><span class="ic">🧩</span>AI 工作流拆解專家 <span class="badge">現場 DEMO</span></h3>
+        <p>輸入專案目標與限制，AI 幫你把工作流一步步拆解。下方按鈕會自動分流到不同伺服器。</p>
+        <button class="tool-link" style="border:0;color:#06201d;background:var(--c-teal);font-weight:900" onclick="lbOpen(this)" data-name="workflow_card" data-urls="https://ai.studio/apps/39157b86-28b9-493c-87e9-267120193d1d|https://ai101.atmarketing.tw/workflow">啟動工具（自動分流）</button>
+        <div class="muted-note" style="margin-top:8px">
+          <a href="https://ai.studio/apps/39157b86-28b9-493c-87e9-267120193d1d" target="_blank" rel="noopener" data-out="t_wf_aistudio">AI Studio 版</a>
+          ·
+          <a href="https://ai101.atmarketing.tw/workflow" target="_blank" rel="noopener" data-out="t_wf_ai101">ai101 版</a>
+        </div>
+      </div>
+      <div class="card"><h3><span class="ic">📝</span>補助計畫書 AI 助手</h3>
+        <p>SBIR / SIIR 計畫書撰寫，從數週縮短到數小時。</p>
+        <a class="tool-link" href="https://ai101.atmarketing.tw/grant" target="_blank" rel="noopener" data-out="t_grant">ai101.atmarketing.tw/grant</a>
+      </div>
+      <div class="card"><h3><span class="ic">💡</span>AI 行銷靈感 / 行銷研究室</h3>
+        <p>輸入品牌與目標，結合熱門話題即時產出客製化社群貼文。</p>
+        <a class="tool-link" href="https://marketing-lab.atmarketing.tw" target="_blank" rel="noopener" data-out="t_lab">marketing-lab.atmarketing.tw</a>
+      </div>
+      <div class="card"><h3><span class="ic">🛒</span>AI101 工具庫（含電商工具箱）</h3>
+        <p>100+ AI 工具示範站，定價、ROAS、LTV、稅務試算等電商工具都在這。</p>
+        <a class="tool-link" href="https://ai101.atmarketing.tw" target="_blank" rel="noopener" data-out="t_ai101">ai101.atmarketing.tw</a>
+      </div>
+    </div>
+    <p class="muted-note">＊以上連結若與現場展示的網址不同，以講師現場公告為準。</p>
+  </div>
+</section>
+
+<!-- ===== DEPLOY / API / SECURITY ===== -->
+<section class="anchor" id="deploy">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 05 · 部署 × API × 資安</div>
+    <h2 class="sec-title">上線 × API × <span class="em">什麼絕對不能做</span></h2>
+    <p class="sec-desc">工具做好之後，怎麼讓別人用得到、API 怎麼用，以及資安底線。</p>
+
+    <h3 style="margin:6px 0 12px">三種部署方式</h3>
+    <div class="grid g3" style="margin-bottom:24px">
+      <div class="card"><h3><span class="ic">🤝</span>① 無需部署 <span class="badge">最快</span></h3><p>直接分享 GEMs / GPTs 連結，對方有帳號即可用。</p><p style="color:var(--c-teal);font-weight:800">適合：純對話型助手</p></div>
+      <div class="card"><h3><span class="ic">☁️</span>② 靜態網頁 <span class="badge free">免費</span></h3><p>HTML / JS 工具，用 GitHub Pages 或 Vercel 免費託管。</p>
+        <a class="tool-link" href="https://vercel.com" target="_blank" rel="noopener" data-out="vercel">vercel.com</a></div>
+      <div class="card"><h3><span class="ic">🔌</span>③ API 整合 <span class="badge paid">進階</span></h3><p>取得 API 金鑰，把 AI 串入現有系統或自動化工具。</p><p style="color:var(--c-teal);font-weight:800">適合：接進既有流程</p></div>
+    </div>
+
+    <h3 style="margin:6px 0 12px">API 使用要點</h3>
+    <div class="grid g2" style="margin-bottom:24px">
+      <div class="card"><h3><span class="ic">🧪</span>取得 Gemini API Key</h3><p>在 Google AI Studio 生成金鑰。</p>
+        <a class="tool-link" href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" data-out="gemini_key">aistudio.google.com/apikey</a></div>
+      <div class="card"><h3><span class="ic">🪶</span>取得 Claude API Key</h3><p>在 Anthropic Console 生成金鑰。</p>
+        <a class="tool-link" href="https://console.anthropic.com" target="_blank" rel="noopener" data-out="anthropic_key">console.anthropic.com</a></div>
+    </div>
+    <ul class="clean" style="margin-bottom:24px">
+      <li><b>用 .env 儲存金鑰</b>：寫進環境變數，絕不寫死在程式碼裡，也不上傳 GitHub。</li>
+      <li><b>設定使用量上限</b>：先設好上限，避免一個 bug 讓帳單瞬間爆炸。</li>
+      <li><b>先用 Free tier 試</b>：免費額度試水溫，確認需求後再升級付費。</li>
+    </ul>
+
+    <h3 style="margin:6px 0 12px">資安四大核心原則（不能踩）</h3>
+    <div class="grid g2" style="margin-bottom:24px">
+      <div class="card"><h3><span class="ic">🔑</span>01 金鑰保護</h3><p>API Key 等於你的密碼，一律用環境變數儲存、不上傳 GitHub。</p></div>
+      <div class="card"><h3><span class="ic">📉</span>02 資料最小化</h3><p>只輸入完成任務所需的最少資訊，別餵 AI 吃個資、機密合約。</p></div>
+      <div class="card"><h3><span class="ic">✅</span>03 輸出驗證</h3><p>AI 說的不一定對。數字、法律、重要決策一定要人工確認。</p></div>
+      <div class="card"><h3><span class="ic">🏢</span>04 企業 vs 個人</h3><p>免費版可能用對話訓練模型；處理公司資料請用有隱私保障的企業版。</p></div>
+    </div>
+
+    <div class="callout">
+      <b>⚠ Prompt Injection（提示詞注入）：</b>有人在給 AI 的輸入內容裡偷藏指令，誘導 AI 忽略你的設定。四個防範：
+      <ul class="clean warn" style="margin-top:10px">
+        <li>未經檢查的外部文字，不要讓 AI 直接當指令執行</li>
+        <li>牽涉金錢、刪改、對外發送的動作，一律先人工確認</li>
+        <li>只給工具完成任務所需的最小權限</li>
+        <li>AI 的產出先審核，確認無誤再發布或寄出</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ===== MCP / RECOMMEND ===== -->
+<section class="anchor" id="mcp">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 06 · 外掛 × MCP × 推薦</div>
+    <h2 class="sec-title">MCP 讓 AI 長出「手」 <span class="em">＋ 必裝清單</span></h2>
+    <p class="sec-desc">MCP（Model Context Protocol，Anthropic 提出的開放協議）就是「AI 工具界的 USB」— 讓 AI 用標準化的方式連接外部工具與資料源。</p>
+
+    <div class="grid g3" style="margin-bottom:18px">
+      <div class="card"><h3><span class="ic">🗂️</span>檔案系統</h3><p>讀寫本機文件，不必再複製貼上。</p></div>
+      <div class="card"><h3><span class="ic">🌐</span>瀏覽器控制</h3><p>自動操作網頁：填表、截圖、抓資料。</p></div>
+      <div class="card"><h3><span class="ic">🗄️</span>資料庫查詢</h3><p>直接問「上週的銷售數字是多少？」</p></div>
+    </div>
+    <div class="card" style="border-top-color:var(--c-coral); margin-bottom:30px">
+      <h3><span class="ic">🔗</span>MCP HUB（台灣資料的 MCP 端點）</h3>
+      <p>Twinkle Hub 把台灣各家資料源整理成一個 MCP 端點，客戶端設定一次，AI 就能查資料集、下查詢、用工具。Alpha 期間免費。</p>
+      <a class="tool-link" href="https://hub.twinkleai.tw/" target="_blank" rel="noopener" data-out="twinkle_hub">hub.twinkleai.tw</a>
+    </div>
+
+    <h3 style="margin:6px 0 12px">★★★ 必裝首選</h3>
+    <div class="grid g2" style="margin-bottom:22px">
+      <div class="card"><h3><span class="ic">🪄</span>Claude Artifacts <span class="badge paid">付費</span></h3><p>在對話中直接生成可互動的 HTML / React 工具。</p>
+        <a class="tool-link" href="https://claude.ai" target="_blank" rel="noopener" data-out="r_claude">claude.ai</a></div>
+      <div class="card"><h3><span class="ic">🔬</span>Gemini Deep Research <span class="badge paid">付費</span></h3><p>自動爬網、整理報告，取代幾小時的手動研究。</p>
+        <a class="tool-link" href="https://gemini.google.com" target="_blank" rel="noopener" data-out="r_deep">gemini.google.com</a></div>
+      <div class="card"><h3><span class="ic">📓</span>NotebookLM <span class="badge free">免費</span></h3><p>上傳文件建知識庫，精準問答、不會亂講。</p>
+        <a class="tool-link" href="https://notebooklm.google.com" target="_blank" rel="noopener" data-out="r_nlm">notebooklm.google.com</a></div>
+      <div class="card"><h3><span class="ic">🔎</span>Perplexity AI <span class="badge">免費/付費</span></h3><p>附來源的即時搜尋 AI，解決「知識截止日」問題。</p>
+        <a class="tool-link" href="https://www.perplexity.ai" target="_blank" rel="noopener" data-out="r_pplx">perplexity.ai</a></div>
+    </div>
+
+    <h3 style="margin:6px 0 12px">★★ / ★ 進階選配</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>工具</th><th>用途</th><th>連結</th></tr></thead>
+        <tbody>
+          <tr><td>Cursor</td><td>AI 輔助程式編輯器，不懂 code 也能開發工具</td><td><a href="https://cursor.com" target="_blank" rel="noopener" data-out="r_cursor">cursor.com</a></td></tr>
+          <tr><td>n8n / Make</td><td>No-code 自動化工作流，串接上百種 App</td><td><a href="https://n8n.io" target="_blank" rel="noopener" data-out="r_n8n">n8n.io</a> · <a href="https://www.make.com" target="_blank" rel="noopener" data-out="r_make">make.com</a></td></tr>
+          <tr><td>Gamma AI</td><td>輸入主題，直接生成一份完整簡報</td><td><a href="https://gamma.app" target="_blank" rel="noopener" data-out="r_gamma">gamma.app</a></td></tr>
+          <tr><td>MCP Filesystem</td><td>讓 Claude 直接讀寫本機文件</td><td><a href="https://modelcontextprotocol.io" target="_blank" rel="noopener" data-out="r_mcp_fs">modelcontextprotocol.io</a></td></tr>
+          <tr><td>Playwright MCP</td><td>讓 AI 控制瀏覽器做自動化操作</td><td><a href="https://github.com/microsoft/playwright-mcp" target="_blank" rel="noopener" data-out="r_pw">github.com/microsoft/playwright-mcp</a></td></tr>
+          <tr><td>GitHub MCP</td><td>讓 AI 直接操作你的 GitHub Repo</td><td><a href="https://github.com/github/github-mcp-server" target="_blank" rel="noopener" data-out="r_gh">github.com/github/github-mcp-server</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ===== AFTER / FAQ ===== -->
+<section class="anchor" id="after">
+  <div class="wrap">
+    <div class="sec-tag">MODULE 07 · 課後 × Q&A</div>
+    <h2 class="sec-title">把方法 <span class="em">用起來</span></h2>
+    <p class="sec-desc">學習真正的開始，是課後。別讓今天學的停在筆記裡。</p>
+
+    <div class="grid g3" style="margin-bottom:30px">
+      <div class="card"><h3><span class="ic">📅</span>本週</h3><p>完成今天沒做完的 GEM / GPT — 把課堂上開了頭的助手補完、調到能用。</p></div>
+      <div class="card"><h3><span class="ic">🧪</span>下週</h3><p>用 AI Studio 測一個真實 Prompt — 挑一個工作場景，認真做一次七元素設計。</p></div>
+      <div class="card"><h3><span class="ic">🚀</span>一個月內</h3><p>部署一個讓別人能用的小工具，並研究一個 MCP Server，試著連接看看。</p></div>
+    </div>
+
+    <h3 style="margin:6px 0 14px">常見問題 Q&A</h3>
+    <details class="faq"><summary><span class="q">Q</span><span>我不會寫程式，這些工具真的適合我嗎？</span></summary><div class="a">適合。今天的重點是用 PRD 思維與 AI 輔助（GEMs / GPTs / Claude），讓非工程背景的人也能完成「從想法到上線」。介面操作就能做出第一個助手。</div></details>
+    <details class="faq"><summary><span class="q">Q</span><span>Gemini 和 Claude，哪一個比較好用？</span></summary><div class="a">看任務。日常辦公、Google 生態整合用 Gemini / GEMs；寫 PRD、長文規劃、生成程式碼用 Claude。兩個搭配用最順。</div></details>
+    <details class="faq"><summary><span class="q">Q</span><span>MCP 要怎麼開始安裝、設定？</span></summary><div class="a">最快路徑：先到 <a href="https://hub.twinkleai.tw/" target="_blank" rel="noopener" data-out="faq_hub">hub.twinkleai.tw</a> 一鍵安裝、在客戶端貼上 API key；想更進階再看 <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener" data-out="faq_mcp">modelcontextprotocol.io</a> 的官方文件。</div></details>
+    <details class="faq"><summary><span class="q">Q</span><span>免費版和付費版差異在哪？</span></summary><div class="a">付費版通常解鎖更強模型、更高額度與進階功能（如 Artifacts、Deep Research）。資料隱私上，企業版會明確承諾不將資料用於訓練 — 處理公司資料請用企業版。</div></details>
+    <details class="faq"><summary><span class="q">Q</span><span>API 費用大概怎麼估算？</span></summary><div class="a">依「呼叫量 × 模型單價」計費，先用 Free tier 試水溫，並在後台設使用量上限。小型工具個人試玩通常落在免費額度內。</div></details>
+  </div>
+</section>
+
+<!-- ===== LECTURER ===== -->
+<section class="anchor" id="lecturer" style="border-bottom:0">
+  <div class="wrap">
+    <div class="lect">
+      <div class="ava">🐢</div>
+      <div>
+        <h3 style="margin:0 0 4px">何佳勳（小圭）</h3>
+        <p style="margin:0;color:var(--c-mute)">圭話行銷股份有限公司 創辦人 · 實戰派 AI 工具開發者</p>
+        <p style="margin:10px 0 0">不只教你怎麼問問題，而是帶你建立可重複使用、解決真實工作問題的 AI 工具。不要等「學好了再來做」，而是在動手做的過程中學。</p>
+        <div class="pill-row">
+          <span class="pill">提示詞設計</span>
+          <span class="pill">工具開發</span>
+          <span class="pill">部署 × 資安</span>
+          <span class="pill">MCP × Skill</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="stripe"></div>
+<footer>
+  <div class="wrap">
+    <p class="big">帶著一個做出來的工具，繼續走下去。</p>
+    <p>AI 工具實作工作坊 ｜ 講師 何佳勳（小圭） ｜ <a href="https://atmarketing.tw" target="_blank" rel="noopener" data-out="footer_atm">圭話行銷股份有限公司</a></p>
+    <p style="font-size:.78rem;opacity:.7">本頁為課程輔助資源站，僅供學員使用。</p>
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script>
+  function track(name, params){ if(window.gtag) gtag('event', name, params||{}); }
+
+  // 展開七元素
+  function toggleEl(h){
+    var el = h.parentElement;
+    var open = el.classList.toggle('open');
+    h.querySelector('.el-tog').textContent = open ? '−' : '+';
+  }
+  window.toggleEl = toggleEl;
+
+  // 複製提示詞
+  async function copyPrompt(btn){
+    var box = btn.closest('.prompt-box');
+    var pre = box ? box.querySelector('pre') : null;
+    if(!pre) return;
+    var text = pre.innerText;
+    try {
+      await navigator.clipboard.writeText(text);
+    } catch(e) {
+      var r = document.createRange(); r.selectNode(pre);
+      var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+      try { document.execCommand('copy'); } catch(_){}
+      s.removeAllRanges();
+    }
+    var old = btn.textContent;
+    btn.textContent = '✓ 已複製';
+    btn.classList.add('done');
+    toast('✓ 已複製到剪貼簿，貼到 ChatGPT / Claude / Gemini 即可');
+    var name = box.querySelector('.name') ? box.querySelector('.name').textContent.trim() : 'prompt';
+    track('copy_prompt', { prompt_name: name });
+    setTimeout(function(){ btn.textContent = old; btn.classList.remove('done'); }, 1800);
+  }
+  window.copyPrompt = copyPrompt;
+
+  // 流量分流：隨機開啟其中一個伺服器，避免現場塞車
+  function lbOpen(btn){
+    var urls = (btn.getAttribute('data-urls')||'').split('|').filter(Boolean);
+    if(!urls.length) return;
+    var i = Math.floor(Math.random() * urls.length);
+    var url = urls[i];
+    track('lb_open', { pool: btn.getAttribute('data-name')||'tool', idx: i, url: url });
+    if(window.fbq) fbq('trackCustom', 'OutboundClick', { link: 'lb_' + (btn.getAttribute('data-name')||'') + '_' + i });
+    window.open(url, '_blank', 'noopener');
+  }
+  window.lbOpen = lbOpen;
+
+  // Toast
+  var toastTimer;
+  function toast(msg){
+    var t = document.getElementById('toast');
+    t.textContent = msg; t.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function(){ t.classList.remove('show'); }, 2400);
+  }
+
+  // 外連追蹤
+  document.addEventListener('click', function(e){
+    var a = e.target.closest('a[data-out]');
+    if(!a) return;
+    track('outbound_click', { link: a.getAttribute('data-out'), url: a.href });
+    if(window.fbq) fbq('trackCustom', 'OutboundClick', { link: a.getAttribute('data-out') });
+  });
+
+  // 捲動深度
+  var depths = [25,50,75,100], fired = {};
+  window.addEventListener('scroll', function(){
+    var h = document.documentElement;
+    var p = Math.round((h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100);
+    depths.forEach(function(d){
+      if(p >= d && !fired[d]){ fired[d] = true; track('scroll_depth', { percent: d }); }
+    });
+  }, { passive:true });
+</script>
+</body>
+</html>
