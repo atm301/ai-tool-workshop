@@ -174,7 +174,7 @@
 
   .card {
     background:var(--c-bg-2); border:1px solid var(--c-line); border-radius:14px; padding:20px;
-    border-top:4px solid var(--c-teal); transition:transform .12s, border-color .12s;
+    border-top:4px solid var(--c-teal); transition:transform .12s, border-color .12s; min-width:0;
   }
   .card:hover { transform:translateY(-3px); border-top-color:var(--c-coral); }
   .card h3 { margin:0 0 6px; font-size:1.1rem; display:flex; align-items:center; gap:9px; }
@@ -186,6 +186,7 @@
   .tool-link {
     display:inline-flex; align-items:center; gap:6px; font-weight:800; font-size:.9rem;
     color:var(--c-blue); background:var(--c-bg-3); padding:7px 13px; border-radius:9px; border:1px solid var(--c-line);
+    max-width:100%; word-break:break-all; overflow-wrap:anywhere;
   }
   .tool-link:hover { color:var(--c-yellow); text-decoration:none; border-color:var(--c-yellow); }
   .tool-link::after { content:'↗'; font-size:.85em; opacity:.8; }
@@ -214,7 +215,7 @@
   .el-name small { color:var(--c-mute); font-weight:700; margin-left:8px; font-size:.78rem; letter-spacing:.06em; }
   .el-tog { margin-left:auto; font-size:1.3rem; color:var(--c-teal); font-weight:900; }
   .el-body { max-height:0; overflow:hidden; transition:max-height .25s ease; }
-  .el.open .el-body { max-height:340px; }
+  .el.open .el-body { max-height:520px; }
   .el-body-in { padding:0 16px 16px; }
   .el-why { color:var(--c-mute); margin:0 0 10px; }
   .el-eg { background:#0a201f; border:1px dashed var(--c-teal); border-radius:9px; padding:11px 14px; color:var(--c-teal); font-weight:600; }
@@ -307,6 +308,14 @@
   @keyframes xpfloat { 0%{opacity:0; transform:translate(-50%,8px);} 20%{opacity:1;} 100%{opacity:0; transform:translate(-50%,-32px);} }
 
   #certImg { width:100%; border-radius:12px; border:1px solid var(--c-line); margin:10px 0; }
+
+  /* 字級放大（給長輩）— 控制本身用 px，不隨縮放變動 */
+  .fzctl { position:fixed; top:66px; right:10px; z-index:130; display:flex; align-items:center; gap:4px; background:rgba(20,56,56,.96); border:2px solid var(--c-teal); border-radius:999px; padding:5px 8px; box-shadow:0 4px 16px rgba(0,0,0,.4); }
+  .fzctl .lab { font-size:11px; color:var(--c-mute); font-weight:800; margin:0 2px; }
+  .fzctl button { background:var(--c-bg-3); color:var(--c-text); border:1px solid var(--c-line); border-radius:8px; font-weight:900; line-height:1; padding:5px 9px; cursor:pointer; }
+  .fzctl button.on { background:var(--c-teal); color:#06201d; border-color:var(--c-teal); }
+  .fzctl button:nth-of-type(1){ font-size:12px; } .fzctl button:nth-of-type(2){ font-size:15px; } .fzctl button:nth-of-type(3){ font-size:18px; }
+  @media (max-width:560px){ .fzctl{ top:62px; right:8px; padding:4px 6px; gap:3px; } .fzctl .lab{ display:none; } }
 </style>
 </head>
 <body>
@@ -797,6 +806,14 @@
   </div>
 </footer>
 
+<!-- ===== 字級放大（長輩友善）===== -->
+<div class="fzctl" role="group" aria-label="字級調整">
+  <span class="lab">字級</span>
+  <button data-fz="16" onclick="setFz(16)" aria-label="標準字級" title="標準">A</button>
+  <button data-fz="18" onclick="setFz(18)" aria-label="放大字級" title="放大">A</button>
+  <button data-fz="21" onclick="setFz(21)" aria-label="特大字級" title="特大">A</button>
+</div>
+
 <!-- ===== 報名 modal ===== -->
 <div class="overlay" id="regOverlay" role="dialog" aria-modal="true" aria-labelledby="regTitle">
   <div class="modal">
@@ -917,6 +934,16 @@
       if(p >= d && !fired[d]){ fired[d] = true; track('scroll_depth', { percent: d }); if(d === 100) awardExp('scroll_bottom', 6); }
     });
   }, { passive:true });
+
+  /* ===================== 字級放大（長輩友善）===================== */
+  function setFz(px){
+    document.documentElement.style.setProperty('--base-fz', px + 'px');
+    document.querySelectorAll('.fzctl button').forEach(function(b){ b.classList.toggle('on', +b.getAttribute('data-fz') === px); });
+    try { localStorage.setItem('aitw_fz', px); } catch(e){}
+    if(window.track) track('font_scale', { px: px });
+  }
+  window.setFz = setFz;
+  (function(){ var px = 16; try { px = parseInt(localStorage.getItem('aitw_fz'), 10) || 16; } catch(e){} setFz(px); })();
 
   /* ===================== 學習點數 × 結業證書 ===================== */
   // 分組：當次需要時把 ENABLE_GROUPS 設為 true（其餘不用動）
