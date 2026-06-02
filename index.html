@@ -131,8 +131,14 @@
   header.hero { padding: 54px 0 46px; text-align:center; border-bottom:5px solid var(--c-coral); position:relative; }
   .hero-eyebrow { color:var(--c-yellow); font-size:.78rem; letter-spacing:.22em; margin-bottom:16px; }
   .hero h1 {
-    font-family:'Press Start 2P',monospace; margin:0 0 18px; font-size:clamp(1.3rem,5.2vw,2.5rem);
-    color:var(--c-text); text-shadow:4px 4px 0 var(--c-teal-d); line-height:1.45;
+    font-family:'Press Start 2P','Noto Sans TC',sans-serif; font-weight:900;
+    margin:0 0 18px; font-size:clamp(1.5rem,5.6vw,2.5rem);
+    color:var(--c-text); text-shadow:2px 2px 0 var(--c-teal-d); line-height:1.5;
+  }
+  @media (max-width:480px){
+    .hero h1 { text-shadow:1px 1px 0 var(--c-teal-d); }
+    .topnav .brand { font-size:.6rem; }
+    .hero { padding:40px 0 36px; }
   }
   .hero .sub { font-size:clamp(1rem,2.4vw,1.25rem); color:var(--c-text); max-width:720px; margin:0 auto 14px; }
   .hero .quote {
@@ -267,6 +273,8 @@
 
   .anchor { scroll-margin-top: calc(var(--nav-h) + 14px); }
   .muted-note { font-size:.82rem; color:var(--c-mute); margin-top:8px; }
+  .swipe-hint { display:none; font-size:.82rem; color:var(--c-yellow); margin:0 0 8px; font-weight:700; }
+  @media (max-width:600px){ .swipe-hint { display:block; } }
 </style>
 </head>
 <body>
@@ -489,6 +497,7 @@
     <h2 class="sec-title">聊天介面 vs <span class="em">AI Studio</span>：怎麼選？</h2>
     <p class="sec-desc">用「我想做什麼」來判斷，比用「我會不會」更準。</p>
 
+    <p class="swipe-hint">📱 表格可左右滑動，看「Google AI Studio」欄 →</p>
     <div class="tbl-wrap" style="margin-bottom:18px">
       <table>
         <thead><tr><th>比較面向</th><th>ChatGPT / Gemini / GEMs</th><th>Google AI Studio</th></tr></thead>
@@ -684,6 +693,7 @@
     </div>
 
     <h3 style="margin:6px 0 12px">★★ / ★ 進階選配</h3>
+    <p class="swipe-hint">📱 表格可左右滑動看「連結」欄 →</p>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>工具</th><th>用途</th><th>連結</th></tr></thead>
